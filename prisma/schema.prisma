@@ -1,0 +1,26 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Affermations {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  type String
+  text String @unique
+}
+
+model User {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  email String  @unique
+  name  String?
+}
+
+model StartTime {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  date String
+  time String
+}
