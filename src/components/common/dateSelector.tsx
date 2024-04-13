@@ -1,15 +1,22 @@
 "use client";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-import { getDate, getDayAndDateCurrentMonth } from "@/lib/dateAndTime";
-import { useEffect, useRef, useState } from "react";
+import { getDayAndDateCurrentMonth } from "@/lib/dateAndTime";
+import { useEffect, useRef } from "react";
 
-export function DateSelector() {
+export interface DateSelectorProps {
+  selectedDate: string;
+  updateDate: (date: number) => void;
+}
+
+export function DateSelector({ selectedDate, updateDate }: DateSelectorProps) {
   const days = getDayAndDateCurrentMonth();
-  const today = getDate();
-  const [selectedDate, setSelectedDate] = useState(today);
 
   const divRef = useRef<HTMLDivElement>(null);
+
+  const setDate = (date: string) => {
+    updateDate(+date);
+  };
 
   useEffect(() => {
     scrollToElement();
@@ -35,7 +42,7 @@ export function DateSelector() {
             date === selectedDate ? "bg-dateBackground" : ""
           }`}
           ref={date === selectedDate ? divRef : null}
-          onClick={() => setSelectedDate(date)}
+          onClick={() => setDate(date)}
         >
           <span
             className={`capitalize text-sm mx-auto font-light ${

@@ -19,7 +19,12 @@ export enum Months {
  * Function to get a formatted date string from a Date object
  * @returns A dayjs object
  */
-export const getCurrentDate = (): dayjs.Dayjs => {
+export const getCurrentDate = (
+  date?: string | number | Date | dayjs.Dayjs | null | undefined
+): dayjs.Dayjs => {
+  if (date) {
+    return dayjs(date);
+  }
   return dayjs();
 };
 
@@ -42,13 +47,16 @@ export const getDateString = (date: dayjs.Dayjs): String => {
  * @param date - The Date object to format
  * @returns A string representing the time in "hh:mm A" format
  */
-export const getTimeString = (date: dayjs.Dayjs): String => {
+export const getTimeString = (
+  date: dayjs.Dayjs,
+  format = "hh:mm A"
+): String => {
   const dateObj = dayjs(date);
   if (!dateObj.isValid) {
     return "";
   }
 
-  return dateObj.format("hh:mm A");
+  return dateObj.format(format);
 };
 
 /**
@@ -65,8 +73,7 @@ export const getDateTimeString = (date: dayjs.Dayjs): String => {
   return dateObj.format("DD/MM/YYYY-hh:mm A");
 };
 
-export const getTodayString = (): String[] => {
-  const today = dayjs();
+export const getTodayString = (today = dayjs()): String[] => {
   return [today.format("MMMM, YY"), today.format("D, dddd")];
 };
 
@@ -100,4 +107,17 @@ export const getMonth = (
   date = getCurrentDate()
 ) => {
   return date.format(monthFormate);
+};
+
+/**
+ * Function to get a formatted time string from a Date object
+ * @param date - The Date object to format
+ * @param yearFormate - The month formate
+ * @returns A string representing the date time in "DD/MM/YYYY-hh:mm A" format
+ */
+export const getYear = (
+  yearFormate: "YY" | "YYYY" = "YYYY",
+  date = getCurrentDate()
+) => {
+  return date.format(yearFormate);
 };

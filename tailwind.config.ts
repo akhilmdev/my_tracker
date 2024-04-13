@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const colors = require("tailwindcss/colors");
 
 const config: Config = {
   content: [
@@ -24,6 +25,9 @@ const config: Config = {
       icon: "#ffffff",
       pageBackground: "#1d1d1d",
       dateBackground: "#f59e0b",
+      dueDateBackground: colors.yellow[500],
+      tagBackground: colors.orange[500],
+      cardBackground: colors.indigo[200],
     },
     fontFamily: {
       affermations: "Madimi One, sans-serif",
