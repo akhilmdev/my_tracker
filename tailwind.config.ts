@@ -28,6 +28,7 @@ const config: Config = {
       dueDateBackground: colors.yellow[500],
       tagBackground: colors.orange[500],
       cardBackground: colors.indigo[200],
+      buttonPrimary: "#1976d2",
     },
     fontFamily: {
       affermations: "Madimi One, sans-serif",
